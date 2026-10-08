@@ -1,4 +1,3 @@
-import {HOME_URL} from '../config';
 import type {SimulationClock} from '../types/telemetry';
 import type {SendUplink} from '../types/uplink';
 import {formatSimulationTime} from '../utils/format';
@@ -18,9 +17,6 @@ interface TopBarProps {
 export function TopBar({ clock, hasSignal, sendUplink }: TopBarProps) {
   return (
     <header className={styles.bar}>
-      <a className={styles.homeLink} href={HOME_URL}>
-        ← davutcagri.com
-      </a>
       <h1 className={styles.title}>Ground Station</h1>
       <LinkIndicator hasSignal={hasSignal} />
       <div className={styles.time}>

@@ -1,0 +1,16 @@
+export const COLORS = {
+  background: '#ffffff',
+  panel: '#ffffff',
+  border: '#cccccc',
+  text: '#1a1a1a',
+  muted: '#666666',
+  accent: '#1a56a5',
+  green: '#1a7f37',
+  orange: '#b45309',
+  red: '#c62828',
+  sun: '#b45309',
+  earth: '#cfe0f5',
+  earthEdge: '#3b78c4',
+  shadow: 'rgba(0, 0, 0, 0.12)',
+  satelliteShade: '#666666',
+};

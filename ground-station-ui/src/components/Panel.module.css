@@ -1,0 +1,11 @@
+.panel {
+  border: 1px solid var(--border);
+  padding: 12px;
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+}

@@ -1,0 +1,26 @@
+:root {
+  --background: #ffffff;
+  --panel: #ffffff;
+  --border: #cccccc;
+  --text: #1a1a1a;
+  --muted: #666666;
+  --accent: #1a56a5;
+  --green: #1a7f37;
+  --orange: #b45309;
+  --red: #c62828;
+  --sun: #b45309;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,5 @@
+.message {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--muted);
+}

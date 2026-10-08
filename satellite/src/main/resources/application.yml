@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: satellite
+
+server:
+  port: 8081
+
+satellite:
+  power:
+    solar-array-peak-watts: 84000
+    fault-output-fraction: 0.5
+    battery-capacity-watt-hours: 100000
+    initial-battery-charge-percent: 80
+  loads:
+    nominal-bus-watts: 40000
+    power-saving-bus-watts: 30000
+    safe-bus-watts: 10000
+    payload-watts: 30000
+  autonomy:
+    power-saving-entry-percent: 30
+    safe-entry-percent: 15
+    safe-exit-percent: 25
+    nominal-return-percent: 60
+  link:
+    publish-interval-millis: 100

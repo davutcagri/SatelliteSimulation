@@ -1,0 +1,36 @@
+.gauge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-size: 22px;
+  font-weight: 600;
+  min-width: 90px;
+}
+
+.track {
+  flex: 1;
+  height: 12px;
+  background: #eeeeee;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+}
+
+.normal {
+  background: var(--green);
+}
+
+.low {
+  background: var(--orange);
+}
+
+.critical {
+  background: var(--red);
+}

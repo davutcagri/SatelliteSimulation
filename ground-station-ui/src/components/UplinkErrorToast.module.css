@@ -1,0 +1,11 @@
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 32px);
+  padding: 8px 16px;
+  border: 1px solid var(--red);
+  background: #ffffff;
+  color: var(--red);
+}

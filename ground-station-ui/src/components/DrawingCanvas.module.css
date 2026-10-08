@@ -1,0 +1,7 @@
+.canvas {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto 8px;
+  aspect-ratio: 1 / 1;
+}

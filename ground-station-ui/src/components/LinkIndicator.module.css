@@ -1,0 +1,11 @@
+.indicator {
+  white-space: nowrap;
+}
+
+.connected {
+  color: var(--green);
+}
+
+.lost {
+  color: var(--red);
+}

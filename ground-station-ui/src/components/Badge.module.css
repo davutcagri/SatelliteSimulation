@@ -1,0 +1,24 @@
+.badge {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.green {
+  color: var(--green);
+}
+
+.orange {
+  color: var(--orange);
+}
+
+.red {
+  color: var(--red);
+}
+
+.sun {
+  color: var(--sun);
+}
+
+.neutral {
+  color: var(--muted);
+}

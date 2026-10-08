@@ -2,14 +2,12 @@ package com.davutcagri.satsim.telemetry;
 
 import com.davutcagri.satsim.config.GroundStationProperties;
 import com.davutcagri.satsim.link.TelemetryPacket;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-@Component
 public class TelemetryHistory {
 
     private final double sampleIntervalSeconds;
@@ -17,9 +15,9 @@ public class TelemetryHistory {
     private final Deque<TelemetryPacket> samples = new ArrayDeque<>();
     private double lastSampleTimeSeconds;
 
-    public TelemetryHistory(GroundStationProperties properties) {
-        this.sampleIntervalSeconds = properties.history().sampleIntervalSeconds();
-        this.capacity = properties.history().capacity();
+    public TelemetryHistory(GroundStationProperties.History properties) {
+        this.sampleIntervalSeconds = properties.sampleIntervalSeconds();
+        this.capacity = properties.capacity();
     }
 
     public synchronized void record(TelemetryPacket packet) {

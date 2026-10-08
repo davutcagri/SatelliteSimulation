@@ -4,12 +4,16 @@ export const API_URL = import.meta.env.VITE_API_URL ?? DEFAULT_API_URL;
 export const TELEMETRY_SOCKET_URL = `${API_URL.replace(/^http/, 'ws')}/ws/telemetry`;
 export const UPLINK_URL = `${API_URL}/api/uplink`;
 export const HISTORY_URL = `${API_URL}/api/telemetry/history`;
+export const SESSION_HEADER = 'X-Session-Id';
+export const HOME_URL = 'https://davutcagri.com';
 
 export const HISTORY_LIMIT = 2000;
 export const HISTORY_STEP_SECONDS = 10;
 export const SIGNAL_TIMEOUT_MS = 2000;
 export const SIGNAL_CHECK_INTERVAL_MS = 500;
 export const RECONNECT_DELAY_MS = 1000;
+export const CAPACITY_RETRY_DELAY_MS = 5000;
+export const CAPACITY_REACHED_CLOSE_CODE = 4001;
 export const UPLINK_ERROR_DISPLAY_MS = 4000;
 export const SATELLITE_LINK_DOWN_STATUS = 503;
 

@@ -1,12 +1,10 @@
 package com.davutcagri.satsim.communication;
 
 import com.davutcagri.satsim.link.TelemetryPacket;
-import com.davutcagri.satsim.telemetry.TelemetryRecorder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -15,17 +13,14 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class TelemetryBroadcaster {
 
-    private final TelemetryRecorder recorder;
     private final LinkSessionRegistry registry;
     private final ObjectMapper objectMapper;
     private final long publishIntervalMillis;
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-    public TelemetryBroadcaster(TelemetryRecorder recorder,
-                                LinkSessionRegistry registry,
+    public TelemetryBroadcaster(LinkSessionRegistry registry,
                                 ObjectMapper objectMapper,
                                 LinkProperties properties) {
-        this.recorder = recorder;
         this.registry = registry;
         this.objectMapper = objectMapper;
         this.publishIntervalMillis = properties.publishIntervalMillis();
@@ -40,23 +35,21 @@ public class TelemetryBroadcaster {
     }
 
     private void broadcast() {
-        try {
-            TelemetryPacket packet = recorder.latest();
-            if (packet != null && !registry.sessions().isEmpty()) {
-                TextMessage message = new TextMessage(objectMapper.writeValueAsString(packet));
-                registry.sessions().forEach(session -> send(session, message));
-            }
-        } catch (JsonProcessingException | RuntimeException exception) {
-            log.error("Telemetry broadcast failed", exception);
-        }
+        registry.links().forEach(this::send);
     }
 
-    private void send(WebSocketSession session, TextMessage message) {
+    private void send(SimulationLink link) {
+        TelemetryPacket packet = link.simulation().latest();
+        if (packet == null) {
+            return;
+        }
         try {
-            session.sendMessage(message);
+            link.session().sendMessage(new TextMessage(objectMapper.writeValueAsString(packet)));
+        } catch (JsonProcessingException exception) {
+            log.error("Telemetry packet cannot be serialized", exception);
         } catch (Exception exception) {
-            log.warn("Dropping session {}: {}", session.getId(), exception.getMessage());
-            registry.unregister(session.getId());
+            log.warn("Dropping session {}: {}", link.session().getId(), exception.getMessage());
+            registry.unregister(link.session().getId());
         }
     }
 }

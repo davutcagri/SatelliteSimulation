@@ -9,12 +9,14 @@ export interface TelemetryState {
   latest: TelemetryPacket | null;
   history: TelemetryPacket[];
   hasSignal: boolean;
+  capacityReached: boolean;
 }
 
 export function useTelemetry(): TelemetryState {
   const [latest, setLatest] = useState<TelemetryPacket | null>(null);
   const [history, setHistory] = useState<TelemetryPacket[]>([]);
   const [hasSignal, setHasSignal] = useState(false);
+  const [capacityReached, setCapacityReached] = useState(false);
   const lastPacketAtMs = useRef(0);
 
   useEffect(() => {
@@ -31,11 +33,14 @@ export function useTelemetry(): TelemetryState {
 
   useEffect(
     () =>
-      connectTelemetry((packet) => {
-        lastPacketAtMs.current = Date.now();
-        setHasSignal(true);
-        setLatest(packet);
-        setHistory((current) => appendToHistory(current, packet));
+      connectTelemetry({
+        onPacket: (packet) => {
+          lastPacketAtMs.current = Date.now();
+          setHasSignal(true);
+          setLatest(packet);
+          setHistory((current) => appendToHistory(current, packet));
+        },
+        onCapacityChange: setCapacityReached,
       }),
     [],
   );
@@ -47,5 +52,5 @@ export function useTelemetry(): TelemetryState {
     return () => window.clearInterval(timer);
   }, []);
 
-  return { latest, history, hasSignal };
+  return { latest, history, hasSignal, capacityReached };
 }

@@ -8,8 +8,9 @@ server:
 groundstation:
   satellite-url: ws://localhost:8081/link
   allowed-origin: http://localhost:5173
-  reconnect-interval: 2s
   connect-timeout: 2s
+  max-sessions: 3
+  session-idle-timeout: 60s
   history:
     sample-interval-seconds: 10
     capacity: 2000

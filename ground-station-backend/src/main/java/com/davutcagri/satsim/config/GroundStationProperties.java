@@ -10,8 +10,9 @@ import java.time.Duration;
 public record GroundStationProperties(
         @DefaultValue("ws://localhost:8081/link") URI satelliteUrl,
         @DefaultValue("http://localhost:5173") String allowedOrigin,
-        @DefaultValue("2s") Duration reconnectInterval,
         @DefaultValue("2s") Duration connectTimeout,
+        @DefaultValue("3") int maxSessions,
+        @DefaultValue("60s") Duration sessionIdleTimeout,
         @DefaultValue History history
 ) {
 

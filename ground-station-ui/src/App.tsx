@@ -6,7 +6,7 @@ import {useTelemetry} from './hooks/useTelemetry';
 import {useUplink} from './hooks/useUplink';
 
 export function App() {
-  const { latest, history, hasSignal } = useTelemetry();
+  const { latest, history, hasSignal, capacityReached } = useTelemetry();
   const { send, errorMessage } = useUplink();
 
   return (
@@ -15,7 +15,7 @@ export function App() {
       {latest ? (
         <Dashboard packet={latest} history={history} hasSignal={hasSignal} sendUplink={send} />
       ) : (
-        <WaitingForTelemetry />
+        <WaitingForTelemetry capacityReached={capacityReached} />
       )}
       <UplinkErrorToast message={errorMessage} />
     </>
